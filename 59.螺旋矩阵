@@ -1,0 +1,29 @@
+class Solution(object):
+    def generateMatrix(self, n):
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        nums = [[0] * n for _ in range(n)]
+        mid = n // 2
+        flag = 1
+        for i in range(0 , n // 2):
+        # '''right'''
+            for j in range(i , n - i):
+                nums[i][j] = flag
+                flag += 1
+        # '''down'''
+            for j in range(i + 1 , n - i):
+                nums[j][n - 1 - i] = flag
+                flag += 1
+        # '''left'''
+            for j in range(n - 2 - i , i - 1 , -1):
+                nums[n - 1 - i][j] = flag
+                flag += 1
+        # '''up'''
+            for j in range(n - 2 - i , i , -1):
+                nums[j][i] = flag
+                flag += 1
+        if n % 2 == 1:
+            nums[mid][mid] = n * n
+        return nums
